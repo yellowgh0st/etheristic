@@ -4,7 +4,8 @@
   "description": "A bridge between Stellar and Ethereum.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+		"dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "ethers": "^5.5.1",
     "fs": "^0.0.1-security",
     "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.15",
     "path": "^0.12.7",
     "piscina": "^3.2.0"
   }
