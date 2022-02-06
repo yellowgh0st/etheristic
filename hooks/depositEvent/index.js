@@ -23,7 +23,7 @@ module.exports = {
 										timestamp,
 										index,
 										transactionHash: rct.transactionHash,
-									}, { filename: path.join(__dirname, '../../workers/issueStellarToken') })
+									}, { filename: path.join(__dirname, '../../workers/distributeStellarToken') })
 								})
 						})
 				})

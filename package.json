@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-		"dev": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.15",
     "path": "^0.12.7",
-    "piscina": "^3.2.0"
+    "piscina": "^3.2.0",
+    "stellar-sdk": "^10.0.1"
   }
 }

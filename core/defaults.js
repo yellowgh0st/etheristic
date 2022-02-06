@@ -1,5 +1,6 @@
 require('dotenv').config()
 const { ethers } = require('ethers')
+const stellar = require('stellar-sdk')
 
 const defaults = {}
 
@@ -21,14 +22,39 @@ defaults.network.provider = new ethers.providers.FallbackProvider(
 
 defaults.network.contract = {}
 defaults.network.contract.deposit = defaults.network.chainId === 4 ?
-	'0x77304419048195263543E83C3BCDD42CBD43954e' :
+	'0x5A699d414De377Db7275Bbe4a41E7137cE465169' :
 	undefined
 
 defaults.network.transaction = {}
 defaults.network.transaction.confirmations = 3
 
+defaults.stellar = {}
+defaults.stellar.network = 'testnet'
+defaults.stellar.fee = 100
+defaults.stellar.server = {}
+defaults.stellar.server.url = defaults.stellar.network === 'testnet' ?
+	'https://horizon-testnet.stellar.org' :
+	'https://horizon.stellar.org'
+
+defaults.stellar.account = {}
+defaults.stellar.account.distributor = {}
+defaults.stellar.account.distributor.secret = process.env.DISTRIBUTOR_SECRET
+defaults.stellar.account.distributor.keyPair = stellar.Keypair.fromSecret(defaults.stellar.account.distributor.secret)
+defaults.stellar.account.issuer = {}
+defaults.stellar.account.issuer.public = defaults.stellar.network === 'testnet' ?
+	'GC6SP434T2QOOXUGDMWHCKH4M6NBDV4KZORDTIP63RL5HXK3FXFXGIL2' :
+	'GCEBPUZELKFLTYFCWIXXBOGPAB4PEMMJSSHDXGEFORBG5PPKOCTKODLV'
+
+defaults.stellar.transaction = {}
+defaults.stellar.transaction.timeout = 100
+
+defaults.stellar.asset = new stellar.Asset(
+	'VADER',
+	defaults.stellar.account.issuer.public,
+)
+
 defaults.depositEventListener = {}
-defaults.depositEventListener.count = 2
+defaults.depositEventListener.count = 1
 defaults.timeToUpdate = 1000
 
 module.exports = defaults
