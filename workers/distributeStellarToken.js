@@ -19,7 +19,8 @@ module.exports = async ({
 		}
 	}) ? true : false
 
-	if(!distributed) {
+	if(history.length > 0 &&
+		!distributed) {
 		await makePayment(
 			utils.toUtf8String(pubkey),
 			Number(utils.formatUnits(amount, 18)).toFixed(7),

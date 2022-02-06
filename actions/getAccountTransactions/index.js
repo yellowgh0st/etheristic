@@ -7,13 +7,16 @@ module.exports = async (pubkey) => {
 		.transactions()
 		.forAccount(pubkey)
 		.order('desc')
+		.includeFailed(false)
 		.limit(defaults.stellar.server.queryLimit)
 	const transactions = []
 
-	let call = await query.call()
-	while (call.records.length > 0) {
-		call.records.forEach((record) => transactions.push(record))
-		call = await call.next()
+	let call = await query?.call()
+	if (call) {
+		while (call.records.length > 0) {
+			call.records.forEach((record) => transactions.push(record))
+			call = await call.next()
+		}
 	}
 
 	return transactions
