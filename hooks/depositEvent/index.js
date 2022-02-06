@@ -27,7 +27,7 @@ module.exports = {
 								})
 						})
 				})
-				console.log(`DepositEvent: ✅ #${i + 1} listener added`)
+				console.log(`DepositEvent: ✅ #${i} listener added`)
 			}
 		}
 		catch {

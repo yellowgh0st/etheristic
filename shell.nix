@@ -11,5 +11,6 @@
     nativeBuildInputs = [ 
       pkgs.nodejs-17_x
       pkgs.yarn
+      pkgs.libtool
     ];
 }

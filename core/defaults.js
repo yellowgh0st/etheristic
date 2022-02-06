@@ -35,6 +35,7 @@ defaults.stellar.server = {}
 defaults.stellar.server.url = defaults.stellar.network === 'testnet' ?
 	'https://horizon-testnet.stellar.org' :
 	'https://horizon.stellar.org'
+defaults.stellar.server.queryLimit = 200
 
 defaults.stellar.account = {}
 defaults.stellar.account.distributor = {}
