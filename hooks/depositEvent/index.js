@@ -30,8 +30,9 @@ module.exports = {
 				console.log(`DepositEvent: ✅ #${i} listener added`)
 			}
 		}
-		catch {
+		catch (error) {
 			console.log('DepositEvent: ❌ no listener added')
+			console.error(error)
 		}
 	},
 }

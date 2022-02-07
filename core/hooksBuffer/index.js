@@ -20,8 +20,8 @@ module.exports = async (init) => {
 		}
 		init(buffer)
 	}
-	catch (err) {
-		console.log(err)
+	catch (error) {
+		console.error(error)
 	}
 	finally {
 		buffer = []
