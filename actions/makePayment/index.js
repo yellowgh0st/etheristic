@@ -1,7 +1,12 @@
 const defaults = require('../../core/defaults')
 const stellar = require('stellar-sdk')
+const { setTimeout } = require('timers/promises')
 
-module.exports = async (pubkey, amount, transactionHash) => {
+const submit = async (
+	pubkey,
+	amount,
+	transactionHash,
+) => {
 	try {
 		const horizon = new stellar.Server(defaults.stellar.server.url)
 		const distributor = await horizon.loadAccount(defaults.stellar.account.distributor.keyPair.publicKey())
@@ -19,11 +24,29 @@ module.exports = async (pubkey, amount, transactionHash) => {
 			.addMemo(memo)
 			.setTimeout(defaults.stellar.transaction.timeout)
 			.build()
-
 		await transaction.sign(defaults.stellar.account.distributor.keyPair)
 		await horizon.submitTransaction(transaction)
 	}
 	catch (error) {
-		console.error(error)
+		await setTimeout(defaults.stellar.transaction.timeToWaitBeforeReSubmit)
+		await submit(pubkey, amount, transactionHash)
+		if (error?.response?.data) {
+			if (error.response.data.extras) {
+				if(error.response.data.extras.result_codes.transaction) {
+					console.error(error.response.data.extras.result_codes.transaction)
+				}
+				else {
+					console.error(error.response.data.extras)
+				}
+			}
+			else {
+				console.error(error.response.data)
+			}
+		}
+		else {
+			console.error(error)
+		}
 	}
 }
+
+module.exports.submit = submit

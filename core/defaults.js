@@ -30,7 +30,7 @@ defaults.network.transaction.confirmations = 3
 
 defaults.stellar = {}
 defaults.stellar.network = 'testnet'
-defaults.stellar.fee = 100
+defaults.stellar.fee = 10000
 defaults.stellar.server = {}
 defaults.stellar.server.url = defaults.stellar.network === 'testnet' ?
 	'https://horizon-testnet.stellar.org' :
@@ -48,6 +48,7 @@ defaults.stellar.account.issuer.public = defaults.stellar.network === 'testnet' 
 
 defaults.stellar.transaction = {}
 defaults.stellar.transaction.timeout = 100
+defaults.stellar.transaction.timeToWaitBeforeReSubmit = 3500
 
 defaults.stellar.asset = new stellar.Asset(
 	'VADER',
